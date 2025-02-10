@@ -64,7 +64,7 @@ def main():
     # Muestra el DataFrame si se ha cargado correctamente
     if not data.empty:
         st.write("Vista previa de los datos:")
-        st.dataframe(data.head())
+        st.dataframe(data)
 
 if __name__ == "__main__":
     main()
