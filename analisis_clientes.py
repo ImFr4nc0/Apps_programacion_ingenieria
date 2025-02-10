@@ -42,22 +42,24 @@ def main():
     Función principal de la aplicación Streamlit.
     """
     st.title("Carga de Archivos CSV")
-    st.write("Sube un archivo CSV desde tu computadora o proporciona un enlace público.")
-
-    # Entrada de URL para cargar CSV
-    url = st.text_input("Introduce la URL del archivo CSV:")
+    st.write("Selecciona una opción para cargar un archivo CSV.")
     
-    # Opción para subir archivo desde la computadora
-    uploaded_file = st.file_uploader("O sube un archivo CSV desde tu computadora", type=["csv"])
+    # Checkbox para seleccionar el método de carga
+    use_url = st.checkbox("Cargar desde URL")
+    use_file = st.checkbox("Subir archivo desde la computadora")
     
     data = pd.DataFrame()
     
-    if url and uploaded_file:
-        st.error("Por favor, elige solo una opción: URL o archivo local.")
-    elif url:
-        data = load_csv_from_url(url)
-    elif uploaded_file:
-        data = load_csv_from_file(uploaded_file)
+    if use_url and use_file:
+        st.error("Por favor, selecciona solo una opción: URL o archivo local.")
+    elif use_url:
+        url = st.text_input("Introduce la URL del archivo CSV:")
+        if url:
+            data = load_csv_from_url(url)
+    elif use_file:
+        uploaded_file = st.file_uploader("Sube un archivo CSV desde tu computadora", type=["csv"])
+        if uploaded_file:
+            data = load_csv_from_file(uploaded_file)
     
     # Muestra el DataFrame si se ha cargado correctamente
     if not data.empty:
