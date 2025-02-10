@@ -52,7 +52,9 @@ def main():
     
     data = pd.DataFrame()
     
-    if url:
+    if url and uploaded_file:
+        st.error("Por favor, elige solo una opción: URL o archivo local.")
+    elif url:
         data = load_csv_from_url(url)
     elif uploaded_file:
         data = load_csv_from_file(uploaded_file)
