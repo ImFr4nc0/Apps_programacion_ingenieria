@@ -41,7 +41,8 @@ def main():
     """
     Función principal de la aplicación Streamlit.
     """
-    st.title("Carga de Archivos CSV")
+    st.title("Analisis clientes")
+    st.write("Hecho por Alejandro Gómez Franco")
     st.write("Selecciona una opción para cargar un archivo CSV.")
     
     # Uso de radio buttons para permitir solo una selección
