@@ -44,19 +44,16 @@ def main():
     st.title("Carga de Archivos CSV")
     st.write("Selecciona una opción para cargar un archivo CSV.")
     
-    # Checkbox para seleccionar el método de carga
-    use_url = st.checkbox("Cargar desde URL")
-    use_file = st.checkbox("Subir archivo desde la computadora")
+    # Uso de radio buttons para permitir solo una selección
+    option = st.radio("Elige un método de carga:", ("Ninguno", "Cargar desde URL", "Subir archivo desde la computadora"))
     
     data = pd.DataFrame()
     
-    if use_url and use_file:
-        st.error("Por favor, selecciona solo una opción: URL o archivo local.")
-    elif use_url:
+    if option == "Cargar desde URL":
         url = st.text_input("Introduce la URL del archivo CSV:")
         if url:
             data = load_csv_from_url(url)
-    elif use_file:
+    elif option == "Subir archivo desde la computadora":
         uploaded_file = st.file_uploader("Sube un archivo CSV desde tu computadora", type=["csv"])
         if uploaded_file:
             data = load_csv_from_file(uploaded_file)
@@ -64,7 +61,7 @@ def main():
     # Muestra el DataFrame si se ha cargado correctamente
     if not data.empty:
         st.write("Vista previa de los datos:")
-        st.dataframe(data)
+        st.dataframe(data.head())
 
 if __name__ == "__main__":
     main()
