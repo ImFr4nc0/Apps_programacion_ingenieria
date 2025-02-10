@@ -45,7 +45,7 @@ def main():
     st.write("Selecciona una opción para cargar un archivo CSV.")
     
     # Uso de radio buttons para permitir solo una selección
-    option = st.radio("Elige un método de carga:", ("Ninguno", "Cargar desde URL", "Subir archivo desde la computadora"))
+    option = st.radio("Elige un método de carga:", ("Cargar desde URL", "Subir archivo desde la computadora"))
     
     data = pd.DataFrame()
     
