@@ -27,12 +27,12 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
         df_clean["Nombre"].fillna(df_clean["Nombre"].mode()[0], inplace=True)
     if "Género" in df_clean.columns:
         df_clean["Género"].fillna(df_clean["Género"].mode()[0], inplace=True)
-    if "Ingreso Anual" in df_clean.columns:
-        df_clean["Ingreso Anual"].fillna(df_clean["Ingreso Anual"].mean(), inplace=True)
-    if "Frecuencia de Compra" in df_clean.columns:
-        df_clean["Frecuencia de Compra"].fillna(df_clean["Frecuencia de Compra"].mean(), inplace=True)
-    if "Historial de Compras" in df_clean.columns:
-        df_clean["Historial de Compras"].fillna(df_clean["Historial de Compras"].median(), inplace=True)
+    if "Ingreso_Anual_USD" in df_clean.columns:
+        df_clean["Ingreso_Anual_USD"].fillna(df_clean["Ingreso_Anual_USD"].mean(), inplace=True)
+    if "Historial_Compras" in df_clean.columns:
+        df_clean["Historial_Compras"].fillna(df_clean["Historial_Compras"].mean(), inplace=True)
+    if "Frecuencia_Compra" in df_clean.columns:
+        df_clean["Frecuencia_Compra"].fillna(df_clean["Frecuencia_Compra"].median(), inplace=True)
     if "Latitud" in df_clean.columns and "Longitud" in df_clean.columns:
         df_clean["Latitud"].interpolate(method="linear", inplace=True)
         df_clean["Longitud"].interpolate(method="linear", inplace=True)
