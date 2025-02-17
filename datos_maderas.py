@@ -65,7 +65,8 @@ def main():
         st.write("Mapa de los 10 municipios con mayor movilización de madera:")
         
         # Cargar el shapefile de Colombia
-        colombia = gpd.read_file("path_to_your_shapefile_or_geojson")
+        colombia = gpd.read_file("https://naturalearth.s3.amazonaws.com/50m_cultural\
+/ne_50m_admin_0_countries.zip")
         
         # Agrupar los datos por municipio y departamento
         top_municipios = df.groupby(["MUNICIPIO", "DPTO"])["VOLUMEN M3"].sum().nlargest(10).reset_index()
