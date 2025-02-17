@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+pip install matplotlib
 import matplotlib.pyplot as plt
 from io import StringIO
 
@@ -48,7 +49,7 @@ def main():
         ax.set_title("Top 10 especies con mayor volumen de madera movilizado")
         ax.invert_yaxis()
         
-        st.pyplot(fig)
+        st.plt(fig)
 
 if __name__ == "__main__":
     main()
