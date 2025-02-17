@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import matplotlib.pyplot as plt
+import seaborn as sns
 from io import StringIO
 
 def load_csv_from_url(url):
@@ -48,6 +49,15 @@ def main():
         ax.set_title("Top 10 especies con mayor volumen de madera movilizado")
         ax.invert_yaxis()
         
+        st.pyplot(fig)
+        
+        st.write("Mapa de calor de volumen de madera por departamento:")
+        heatmap_data = df.groupby("DPTO")["VOLUMEN M3"].sum().reset_index()
+        heatmap_data = heatmap_data.pivot_table(values="VOLUMEN M3", index="DPTO")
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.heatmap(heatmap_data, cmap="Blues", annot=True, fmt=".0f", linewidths=0.5, ax=ax)
+        ax.set_title("Mapa de calor del volumen de madera por departamento")
         st.pyplot(fig)
 
 if __name__ == "__main__":
