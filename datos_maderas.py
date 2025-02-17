@@ -32,11 +32,10 @@ def main():
         st.write("Vista previa del dataset:")
         st.dataframe(df.head())
         
-        st.write("Información sobre valores nulos:")
-        missing_values = df.isnull().sum()
-        empty_cells = (df == '').sum()
-        st.write("Valores nulos por columna:", missing_values)
-        st.write("Celdas vacías por columna:", empty_cells)
+        st.write("Agrupación por DPTO de especies con sus volúmenes:")
+        grouped_df = df.groupby(["DPTO", "ESPECIE"])["VOLUMEN M3"].sum().reset_index()
+        sorted_df = grouped_df.sort_values(by=["DPTO", "VOLUMEN M3"], ascending=[True, False])
+        st.dataframe(sorted_df)
 
 if __name__ == "__main__":
     main()
