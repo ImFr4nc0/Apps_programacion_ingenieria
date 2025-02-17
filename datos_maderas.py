@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import requests
-pip install matplotlib
 import matplotlib.pyplot as plt
 from io import StringIO
 
