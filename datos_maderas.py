@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from io import StringIO
 
 def load_csv_from_url(url):
