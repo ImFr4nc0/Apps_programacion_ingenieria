@@ -48,7 +48,7 @@ def main():
         ax.set_title("Top 10 especies con mayor volumen de madera movilizado")
         ax.invert_yaxis()
         
-        st.plt(fig)
+        st.pyplot(fig)
 
 if __name__ == "__main__":
     main()
