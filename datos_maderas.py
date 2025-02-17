@@ -3,7 +3,9 @@ import pandas as pd
 import requests
 import matplotlib.pyplot as plt
 import seaborn as sns
+import geopandas as gpd
 from io import StringIO
+from geopy.geocoders import Nominatim
 
 def load_csv_from_url(url):
     response = requests.get(url)
@@ -58,6 +60,33 @@ def main():
         fig, ax = plt.subplots(figsize=(10, 6))
         sns.heatmap(heatmap_data, cmap="Blues", annot=True, fmt=".0f", linewidths=0.5, ax=ax)
         ax.set_title("Mapa de calor del volumen de madera por departamento")
+        st.pyplot(fig)
+        
+        st.write("Mapa de los 10 municipios con mayor movilización de madera:")
+        
+        # Cargar el shapefile de Colombia
+        colombia = gpd.read_file("path_to_your_shapefile_or_geojson")
+        
+        # Agrupar los datos por municipio y departamento
+        top_municipios = df.groupby(["MUNICIPIO", "DPTO"])["VOLUMEN M3"].sum().nlargest(10).reset_index()
+        
+        # Unir los datos con el shapefile
+        colombia['MUNICIPIO'] = colombia['MUNICIPIO'].str.upper()  # Asegurar que los nombres estén en mayúsculas
+        top_municipios['MUNICIPIO'] = top_municipios['MUNICIPIO'].str.upper()
+        
+        merged = colombia.merge(top_municipios, on="MUNICIPIO", how="inner")
+        
+        # Crear el mapa
+        fig, ax = plt.subplots(figsize=(10, 10))
+        colombia.plot(ax=ax, color='lightgray')
+        merged.plot(ax=ax, column="VOLUMEN M3", legend=True, cmap="OrRd", markersize=50)
+        
+        for x, y, label in zip(merged.geometry.centroid.x, merged.geometry.centroid.y, merged["MUNICIPIO"]):
+            ax.text(x, y, label, fontsize=8, ha='center')
+        
+        ax.set_title("Top 10 municipios con mayor movilización de madera")
+        ax.set_axis_off()
+        
         st.pyplot(fig)
 
 if __name__ == "__main__":
