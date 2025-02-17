@@ -30,7 +30,13 @@ def main():
     
     if df is not None:
         st.write("Vista previa del dataset:")
-        st.dataframe(df)
+        st.dataframe(df.head())
+        
+        st.write("Información sobre valores nulos:")
+        missing_values = df.isnull().sum()
+        empty_cells = (df == '').sum()
+        st.write("Valores nulos por columna:", missing_values)
+        st.write("Celdas vacías por columna:", empty_cells)
 
 if __name__ == "__main__":
     main()
